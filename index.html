@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Рейтинг (пример 2)</title>
+    <title>Рейтинг (пример 3)</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -16,11 +16,42 @@
     <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="css/application.css" rel="stylesheet">
+
 </head>
 <body>
 <div id="app" class="container-fluid">
-	<!-- <div class="alert alert-success" role="alert" id="user-name"><i class="fa fa-spinner fa-spin"></i></div> -->
-    <div  id="user-name"></div>
+	<div class="bs-callout bs-callout-danger">
+		<h4>Получение списочных данных</h4>
+		<p>Текущий пользователь: <span id="user-name"><i class="fa fa-spinner fa-spin"></i></span></p>
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-sm-6">
+			<div class="panel panel-default">
+				<table class="table table-responsive">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Название</th>
+							<th>Сумма</th>
+						</tr>
+					</thead>
+					<tbody id="deal-list">
+						<tr>
+							<td colspan="3"><i class="fa fa-spinner fa-spin"></i></td>
+						</tr>
+					</tbody>
+				</table>			
+			</div>			
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="panel panel-success">
+				<div id="deal-sum" class="panel-body text-right">
+					<i class="fa fa-spinner fa-spin"></i>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -29,33 +60,17 @@
 <script src="//api.bitrix24.com/api/v1/"></script>
 
 <script>
-    
-	$(document).ready(function () {
-
-                //GetUsers();
-        //console.log("dddddddd");
-
-            function GetUsers() {
-
-            let url1="https://b24-fik4sy.bitrix24.ru/rest/1/89mi95d2zftrbhvr/crm.deal.list";
-            $.ajax({
-                url: url1,
-                method: "GET",
-                //contentType: "",
-                data:{order:{'STAGE_TITLE':'ASC'},select:['ID','TITLE'],filter:{'<ID':20, '>=ID':5}},
-                success: function (result) {
-                    
-                    //var datas=JSON.parse(result);
-                    console.log(result);
-                 }
-            });
-
-            }/**/
-		//BX24.init(function(){
-			app.displayCurrentUser('#user-name');
-		//});
-    });
 	
+    $(document).ready(function () {
+
+		BX24.init(function(){
+
+			app.displayCurrentUser('#user-name');
+			app.displayUserClosedDeals(1);
+
+		});
+    });
+
 </script>
 
 </body>
