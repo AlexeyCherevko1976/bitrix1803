@@ -1,5 +1,6 @@
 // our application constructor
 function application () {
+	this.variant="ajax";
 }
 
 application.prototype.displayCurrentUser = function(selector) {
@@ -15,12 +16,10 @@ $.ajax({
 	//data:{select:['EMAIL']},
 
     success: function (data) {
+        console.log(data);
         let result=data.result;
-        console.log(result);
-        //console.log(data);
 	    //$(selector).html('Hello ' + result.data().NAME + ' ' + result.data().LAST_NAME + '!');
-	    $(selector).html('Hello '+result.EMAIL+
-	    	' '+result['ID']);
+	    $(selector).html('Hello '+result.EMAIL+' '+result['ID']);
      }
 });
 
